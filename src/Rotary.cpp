@@ -22,7 +22,7 @@ void sys_RotaryInit(void) {
     RButton.setPressTicks(300);
 
     //初始化编码器中断
-    attachInterrupt(ROTARY_PIN1, sys_Counter_IRQHandler, CHANGE);
+    // attachInterrupt(ROTARY_PIN1, sys_Counter_IRQHandler, CHANGE);
 
     //初始化编码器设置(测试默认)
     sys_Counter_Set(-1.2, 6.6, 0.1, 3.14);
@@ -179,7 +179,7 @@ static uint8_t Read_RButton_FIFO(void) {
  */
 void sys_Counter_click(void)
 {
-    printf("触发单击事件\n");
+    Serial.printf("触发单击事件\n");
     SetSound(Beep1);
     Write_RButton_FIFO(1);
 }
@@ -190,7 +190,7 @@ void sys_Counter_click(void)
  */
 void sys_Counter_longclick(void)
 {
-    printf("触发长按事件\n");
+    Serial.printf("触发长按事件\n");
     SetSound(Beep2);
     Write_RButton_FIFO(2);
 }
@@ -201,7 +201,7 @@ void sys_Counter_longclick(void)
  */
 void sys_Counter_doubleclick(void)
 {
-    printf("触发双击事件\n");
+    Serial.printf("触发双击事件\n");
     SetSound(Beep2);
     Write_RButton_FIFO(3);
 }

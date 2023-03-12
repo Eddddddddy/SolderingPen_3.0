@@ -4,7 +4,7 @@ char SYS_SVAE_PATH[50] = "/OpenT12.sav";
 
 void SYS_Save(void) {
     //关闭中断
-    noInterrupts();
+    // noInterrupts();
     //Pop_Windows("保存中 请勿切断电源");
 
     //软盘图标
@@ -67,12 +67,12 @@ void SYS_Save(void) {
     Log(LOG_OK, "存档保存成功!");
  
     //启用中断
-    interrupts();
+    // interrupts();
 }
 
 void SYS_Load(void) {
     //关闭中断
-    noInterrupts();
+    // noInterrupts();
 
     //软盘图标
     DrawMsgBox("加载中");
@@ -149,12 +149,12 @@ void SYS_Load(void) {
     Log(LOG_OK, "存档读取成功!");
 
     //启用中断
-    interrupts();
+    // interrupts();
 }
 
 void FilesSystemInit(void) {
     //关闭中断
-    noInterrupts();
+    // noInterrupts();
 
     if (!SPIFFS.begin(false)) {
         Log(LOG_ERROR, "文件系统打开失败，自动格式化\n");
@@ -163,10 +163,10 @@ void FilesSystemInit(void) {
         Log(LOG_OK,"文件系统初始化完成！");
     }
     //启用中断
-    interrupts();
+    // interrupts();
 
     printf("[OK]文件系统\n");
-
+    
     SYS_Load();
 
     // listDir(SPIFFS, "/", 0);

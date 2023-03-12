@@ -7,6 +7,8 @@ void BeepInit(void) {
     pinMode(BEEP_PIN, OUTPUT);
     ledcAttachPin(BEEP_PIN, BEEP_Channel);  //将通道与对应的引脚连接
     ledcSetup(BEEP_Channel, 1, 8); // 设置通道
+    ledcWrite(BEEP_Channel, 0);
+
     
 
     // pinMode(BEEP_PIN2, OUTPUT);
