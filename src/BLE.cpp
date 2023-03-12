@@ -6,11 +6,11 @@ void BLE_Init(void) {
 
     if (!BLE_State) return;
 
-    SerialBT.begin(BLE_name);
+    // SerialBT.begin(BLE_name);
 }
 
 void BLE_Restart(void){
-    SerialBT.end();
+    // SerialBT.end();
     BLE_Init();
 }
 

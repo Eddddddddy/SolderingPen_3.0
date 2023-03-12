@@ -7,7 +7,7 @@
 #include <U8g2lib.h>
 #include <Ticker.h>
 #include <OneButton.h>
-#include "BluetoothSerial.h"
+// #include "BluetoothSerial.h"
 #include "Type.h"
 #include "serial_putc.h"
 #include "MyShell.h"
@@ -33,25 +33,25 @@
 
 //注意Pin36与Pin39连接了内部霍尔传感器,不建议复用高敏感用途
 //另外，建议给ADC输入串联一个0.1uF的电容，有利于减少噪声
-#define LED_Pin       2
-#define BEEP_PIN      25
+#define LED_Pin       35
+#define BEEP_PIN      3
 
-#define ROTARY_PIN1	  14
-#define ROTARY_PIN2	  12
-#define BUTTON_PIN	  33
+#define ROTARY_PIN1	  4
+#define ROTARY_PIN2	  2
+#define BUTTON_PIN	  0
 
-#define TIP_ADC_PIN   39
+#define TIP_ADC_PIN   1
 #define NTC_ADC_PIN   34
-#define POWER_ADC_PIN 35
+#define POWER_ADC_PIN 6
 #define CUR_ADC_PIN   32
 
-#define PWM1_PIN      26
-#define PWM2_PIN      27
-#define SW_PIN        4
+#define PWM1_PIN      5
+// #define PWM2_PIN      27
+#define SW_PIN        36
 
 //计算主电源电压
-#define POWER_ADC_VCC_R1 10
-#define POWER_ADC_R2_GND 1
+#define POWER_ADC_VCC_R1 100
+#define POWER_ADC_R2_GND 3.3
 
 //检流电阻参数
 #define CUR_ADC_R 0.02
@@ -113,10 +113,11 @@ extern char CompileTime[20];
 
 extern hw_timer_t* SoundTimer;
 
-extern BluetoothSerial SerialBT;
+// extern BluetoothSerial SerialBT;
 extern OneButton RButton;
 // extern U8G2_SSD1306_128X64_NONAME_F_HW_I2C Disp;
-extern U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI Disp;
+// extern U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI Disp;
+extern U8G2_SH1107_64X128_F_HW_I2C Disp;
 // extern U8G2_ST7920_128X64_F_HW_SPI Disp;
 // extern U8G2_ST7920_128X64_F_SW_SPI Disp;
 extern PID MyPID;

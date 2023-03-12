@@ -12,7 +12,7 @@ uint8_t PWM1_Channel = 0;    // 通道
 // uint8_t PWM2_Channel = 0;    // 通道
 uint8_t PWM_Resolution = 8;   // 分辨率
 //基础温控
-uint8_t MyMOS = NMOS;
+uint8_t MyMOS = PMOS;
 uint8_t POWER = 0;
 uint8_t PWM = 0;
 uint8_t LastPWM = 0;
@@ -38,7 +38,7 @@ void TipControlInit(void) {
     SetPOWER(0); //关闭功率管输出
 
     //初始化SW-PIN休眠检测引脚
-    pinMode(SW_PIN, INPUT_PULLUP);
+    // pinMode(SW_PIN, INPUT_PULLUP);
     //初始化SW-PIN休眠检测引脚中断 (尽可能减少中断的使用)
     //attachInterrupt(SW_PIN, SW_IRQHandler, CHANGE);
     

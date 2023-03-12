@@ -96,7 +96,7 @@ void shellInit(void) {
 }
 void ICACHE_RAM_ATTR ShellLoop(void) {
     //命令解析器
-    while (Serial.available() || SerialBT.available()) shell_task();
+    while (Serial.available()) shell_task();
 }
 
 /**
@@ -110,10 +110,10 @@ int shell_reader(char* data)
         *data = Serial.read();
         return 1;
     }
-    if (SerialBT.available()) {
-        *data = SerialBT.read();
-        return 1;
-    }
+    // if (SerialBT.available()) {
+    //     *data = SerialBT.read();
+    //     return 1;
+    // }
     return 0;
 }
 
@@ -126,7 +126,7 @@ void shell_writer(char data)
 {
     //return; //阻止不干净的输出
     Serial.write(data);
-    SerialBT.write(data);
+    // SerialBT.write(data);
 }
 
 void shell_SendDatas(uint8_t buf[],uint32_t size) {
@@ -141,10 +141,10 @@ void shell_SendDatas(uint8_t buf[],uint32_t size) {
    for (uint32_t i=0;i<size;i++)
     CHECK += buf[i];
 
-   SerialBT.write(0xA5);
-   SerialBT.write(buf, size);
-   SerialBT.write(CHECK);
-   SerialBT.write(0x5A);
+//    SerialBT.write(0xA5);
+//    SerialBT.write(buf, size);
+//    SerialBT.write(CHECK);
+//    SerialBT.write(0x5A);
 }
 
 int command_test(int argc, char** argv)

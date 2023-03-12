@@ -10,15 +10,16 @@
 #define TX_QUEUE_SIZE 2048
 
 /////////////////////////////////////////////////////////////////
-BluetoothSerial SerialBT;
-#if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
-#error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
-#endif
+// BluetoothSerial SerialBT;
+// #if !defined(CONFIG_BT_ENABLED) || !defined(CONFIG_BLUEDROID_ENABLED)
+// #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
+// #endif
  
 OneButton RButton(BUTTON_PIN, true);
 // U8G2_SSD1306_128X64_NONAME_F_HW_I2C Disp(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 // U8G2_SSD1306_128X64_NONAME_F_4W_SW_SPI Disp(U8G2_R0, /* clock=*/ 13, /* data=*/ 11, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8);
-U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI Disp(U8G2_R0, /* cs=*/ 5, /* dc=*/ 13, /* reset=*/ 15);
+// U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI Disp(U8G2_R0, /* cs=*/ 5, /* dc=*/ 13, /* reset=*/ 15);
+U8G2_SH1107_64X128_F_HW_I2C Disp(U8G2_R1, 7);
 // U8G2_ST7920_128X64_F_HW_SPI Disp(U8G2_R0, 5, 15);
 // U8G2_ST7920_128X64_F_SW_SPI Disp(U8G2_R0, /*clock*/18, /*data*/23, /*cs*/5, /*reset*/15);
 PID MyPID(&TipTemperature, &PID_Output, &PID_Setpoint, aggKp, aggKi, aggKd, DIRECT);
@@ -100,92 +101,99 @@ hw_timer_t* SoundTimer = NULL;
 //先初始化硬件->显示LOGO->初始化软件
 void setup() {
     //关闭中断
-    noInterrupts();
+    // noInterrupts();
     ////////////////////////////初始化硬件/////////////////////////////
+    //初始化串口
+    Serial.begin(115200);
+    delay(2000);
+    Serial.println("Soldering Pen V2.0");
+
     //获取系统信息
     ChipMAC = ESP.getEfuseMac();
     sprintf(CompileTime, "%s %s", __DATE__, __TIME__);
     for (uint8_t i = 0;i < 6;i++)  sprintf(ChipMAC_S + i * 3, "%02X%s", ((uint8_t*)&ChipMAC)[i], (i != 5) ? ":" : "");
 
-    //初始化串口
-    Serial.begin(115200);
+
 
     //初始化GPIO
     BeepInit();                     //蜂鸣器
     
     // pinMode(LED_Pin, OUTPUT);    //软件运行指示LED
     pinMode(POWER_ADC_PIN, INPUT);  //主电压分压检测ADC
-    pinMode(CUR_ADC_PIN, INPUT);    //检流ADC
+    // pinMode(CUR_ADC_PIN, INPUT);    //检流ADC
     //初始化烙铁头
     TipControlInit();
 
-    //初始化编码器
-    sys_RotaryInit();
+    // //初始化编码器
+    // sys_RotaryInit();
 
-    //初始化OLED
-    Disp.begin();
-    // Disp.setBusClock(921600);
-    Disp.enableUTF8Print();
-    Disp.setFontDirection(0);
-    Disp.setFontPosTop();
-    Disp.setFont(u8g2_font_wqy12_t_gb2312);
-    Disp.setDrawColor(1);
-    Disp.setFontMode(1);
+    // //初始化OLED
+    // Disp.begin();
+    // // Disp.setBusClock(921600);
+    // Disp.enableUTF8Print();
+    // Disp.setFontDirection(0);
+    // Disp.setFontPosTop();
+    // Disp.setFont(u8g2_font_wqy12_t_gb2312);
+    // Disp.setDrawColor(1);
+    // Disp.setFontMode(1);
 
-    ////////////////////////////初始化软件/////////////////////////////
+    // ////////////////////////////初始化软件/////////////////////////////
 
-    //启动文件系统，并读取存档
-    FilesSystemInit();
+    // //启动文件系统，并读取存档
+    // FilesSystemInit();
 
-    //初始化命令解析器
-    shellInit();
+    // //初始化命令解析器
+    // shellInit();
 
-    //初始化蓝牙（可选）
-    BLE_Init();
+    // //初始化蓝牙（可选）
+    // BLE_Init();
 
-    //载入烙铁头配置
-    LoadTipConfig();
+    // //载入烙铁头配置
+    // LoadTipConfig();
 
-    //播放音效
-    SetSound(BootSound);
+    // //播放音效
+    // SetSound(BootSound);
 
-    //显示Logo
-    EnterLogo();
+    // //显示Logo
+    // EnterLogo();
     
-    //开机密码
-    while (!EnterPasswd()) {
-        Pop_Windows("身份验证失败");
-    }
+    // //开机密码
+    // while (!EnterPasswd()) {
+    //     Pop_Windows("身份验证失败");
+    // }
 
-    //初始化UI
-    System_UI_Init();
+    // //初始化UI
+    // System_UI_Init();
 
-    //首次启动的时候根据启动温度配置，重新设定目标温度
-    sys_Counter_SetVal(BootTemp);
+    // //首次启动的时候根据启动温度配置，重新设定目标温度
+    // sys_Counter_SetVal(BootTemp);
 
-    SYS_Ready = true;
-    // ShutdownEventLoop();
+    // SYS_Ready = true;
+    // // ShutdownEventLoop();
 }
 
 void loop() {
-    //获取按键
-    sys_KeyProcess();
+    // //获取按键
+    // sys_KeyProcess();
 
-    if (!Menu_System_State) {
-        //温度闭环控制
-        TemperatureControlLoop();
-        //更新系统事件：：系统事件可能会改变功率输出
-        TimerEventLoop();
-    }
+    // if (!Menu_System_State) {
+    //     //温度闭环控制
+    //     TemperatureControlLoop();
+    //     //更新系统事件：：系统事件可能会改变功率输出
+    //     TimerEventLoop();
+    // }
 
     
-    //更新状态码
-    SYS_StateCode_Update();
-    //设置输出功率
-    SetPOWER(PID_Output);
+    // //更新状态码
+    // SYS_StateCode_Update();
+    // //设置输出功率
+    // SetPOWER(PID_Output);
 
-    //刷新UI
-    System_UI();
+    // //刷新UI
+    // System_UI();
+
+        delay(1000);
+    Serial.println("Soldering Pen V2.0");
 }
 
 
