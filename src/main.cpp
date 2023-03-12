@@ -106,13 +106,12 @@ void setup() {
     //初始化串口
     Serial.begin(115200);
     delay(2000);
-    Serial.println("Soldering Pen V2.0");
+    Serial.println("Soldering Pen V3.0");
 
     //获取系统信息
     ChipMAC = ESP.getEfuseMac();
     sprintf(CompileTime, "%s %s", __DATE__, __TIME__);
     for (uint8_t i = 0;i < 6;i++)  sprintf(ChipMAC_S + i * 3, "%02X%s", ((uint8_t*)&ChipMAC)[i], (i != 5) ? ":" : "");
-
 
 
     //初始化GPIO

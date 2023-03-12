@@ -156,7 +156,7 @@ void FilesSystemInit(void) {
     //关闭中断
     // noInterrupts();
 
-    if (!SPIFFS.begin(false)) {
+    if (!SPIFFS.begin(true)) {
         Log(LOG_ERROR, "文件系统打开失败，自动格式化\n");
         Log(LOG_INFO,"格式化...");
         SPIFFS.format();
