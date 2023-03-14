@@ -15,7 +15,10 @@
 // #error Bluetooth is not enabled! Please run `make menuconfig` to and enable it
 // #endif
  
-OneButton RButton(BUTTON_PIN, true);
+Button2 RButton;
+Button2 PButton;
+Button2 NButton;
+hw_timer_t *buttonTimer = NULL;
 // U8G2_SSD1306_128X64_NONAME_F_HW_I2C Disp(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 // U8G2_SSD1306_128X64_NONAME_F_4W_SW_SPI Disp(U8G2_R0, /* clock=*/ 13, /* data=*/ 11, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8);
 // U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI Disp(U8G2_R0, /* cs=*/ 5, /* dc=*/ 13, /* reset=*/ 15);
@@ -102,6 +105,7 @@ hw_timer_t* SoundTimer = NULL;
 void setup() {
     //关闭中断
     // noInterrupts();
+    // timerAlarmDisable(buttonTimer);
     ////////////////////////////初始化硬件/////////////////////////////
     //初始化串口
     Serial.begin(115200);
@@ -110,8 +114,8 @@ void setup() {
 
     //获取系统信息
     ChipMAC = ESP.getEfuseMac();
-    sprintf(CompileTime, "%s %s", __DATE__, __TIME__);
-    for (uint8_t i = 0;i < 6;i++)  sprintf(ChipMAC_S + i * 3, "%02X%s", ((uint8_t*)&ChipMAC)[i], (i != 5) ? ":" : "");
+    Serial.printf(CompileTime, "%s %s", __DATE__, __TIME__);
+    for (uint8_t i = 0;i < 6;i++)  Serial.printf(ChipMAC_S + i * 3, "%02X%s", ((uint8_t*)&ChipMAC)[i], (i != 5) ? ":" : "");
 
 
     //初始化GPIO

@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include "Type.h"
 
-#define ROTARY_TYPE 2
+#define ROTARY_TYPE 1
 
 extern uint8_t SYSKey;
 extern bool Counter_LOCK_Flag;
@@ -14,12 +14,14 @@ void sys_Counter_SetVal(double c);
 void RotaryUp(void);
 void RotaryDown(void);
 
-void sys_Counter_click(void);
-void sys_Counter_doubleclick(void);
-void sys_Counter_longclick(void);
+void sys_Counter_click(Button2 &b);
+void sys_Counter_doubleclick(Button2 &b);
+void sys_Counter_longclick(Button2 &b);
 void sys_Counter_IRQHandler(void);
 double sys_Counter_Get(void);
 uint8_t sys_Counter_Change(void);
+void sys_PN_click(Button2 &b);
+void IRAM_ATTR ButtonTimer();
 
 void Clear_RButton_FIFO(void);
 uint8_t sys_KeyProcess(void);
