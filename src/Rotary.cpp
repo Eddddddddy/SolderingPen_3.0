@@ -29,16 +29,24 @@ void sys_RotaryInit(void)
     RButton.setLongClickTime(300);
 
     PButton.begin(ROTARY_PIN1);
+    PButton.setDebounceTime(0);
+    PButton.setLongClickTime(200);
     PButton.setID(1);
     PButton.setClickHandler(sys_PN_click);
+    PButton.setLongClickDetectedHandler(sys_PN_click);
+    PButton.setLongClickDetectedRetriggerable(true);
 
     NButton.begin(ROTARY_PIN2);
+    NButton.setDebounceTime(0);
+    NButton.setLongClickTime(200);
     NButton.setID(2);
     NButton.setClickHandler(sys_PN_click);
+    NButton.setLongClickDetectedHandler(sys_PN_click);
+    NButton.setLongClickDetectedRetriggerable(true);
 
     buttonTimer = timerBegin(0, 80, true);
     timerAttachInterrupt(buttonTimer, &ButtonTimer, true);
-    timerAlarmWrite(buttonTimer, 10000, true); // every 0.1 seconds
+    timerAlarmWrite(buttonTimer, 100, true); // every 5ms
     timerAlarmEnable(buttonTimer);
 
     // timerAlarmDisable(buttonTimer);
