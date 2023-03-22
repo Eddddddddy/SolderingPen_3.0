@@ -99,6 +99,9 @@ char ChipMAC_S[19] = { 0 };
 char CompileTime[20];
 //定时器
 hw_timer_t* SoundTimer = NULL;
+
+// ADC
+ESP32AnalogRead powerADC;
 /////////////////////////////////////////////////////////////////
 
 //先初始化硬件->显示LOGO->初始化软件
@@ -123,6 +126,8 @@ void setup() {
     
     // pinMode(LED_Pin, OUTPUT);    //软件运行指示LED
     pinMode(POWER_ADC_PIN, INPUT);  //主电压分压检测ADC
+    powerADC.attach(POWER_ADC_PIN);
+
     // pinMode(CUR_ADC_PIN, INPUT);    //检流ADC
     //初始化烙铁头
     TipControlInit();
