@@ -7,6 +7,7 @@
 #include <U8g2lib.h>
 #include <Wire.h>
 #include <Ticker.h>
+#include <ESP32AnalogRead.h>
 // #include <OneButton.h>
 #include <Button2.h>
 // #include "BluetoothSerial.h"
@@ -180,6 +181,9 @@ extern uint8_t Language;
 extern uint8_t MenuListMode;
 
 extern float ADC_PID_Cycle;
+
+extern ESP32AnalogRead ADC0;
+extern ESP32AnalogRead powerADC;
 
 enum TEMP_CTRL_STATUS_CODE
 {

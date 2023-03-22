@@ -26,10 +26,13 @@ uint32_t ADCSamplingInterval = 0; //ADC采样间隔(ms)
 float aggKp = 30.0, aggKi = 0, aggKd = 0.5;
 float consKp = 20.0, consKi = 1, consKd = 0.5;
 
+ESP32AnalogRead ADC0;
+
 //初始化烙铁头温控系统
 void TipControlInit(void) {
     //初始化ADC输入GPIO
     pinMode(TIP_ADC_PIN, INPUT_PULLUP); //ADC
+    ADC0.attach(TIP_ADC_PIN);
 
     ledcAttachPin(PWM1_PIN, PWM1_Channel);  // 绑定PWM1通道
     // ledcAttachPin(PWM2_PIN, PWM2_Channel);  // 绑定PWM2通道
@@ -57,7 +60,8 @@ double Get_MainPowerVoltage(void) {
     static uint32_t CoolTimer = 0;
     if (millis() - CoolTimer > 100) {
         //uint16_t POWER_ADC = analogRead(POWER_ADC_PIN);
-        double TipADC_V_R2 = analogReadMilliVolts(POWER_ADC_PIN) / 1000.0;
+        // double TipADC_V_R2 = analogReadMilliVolts(POWER_ADC_PIN) / 1000.0;
+        double TipADC_V_R2 = powerADC.readMiliVolts() / 1000.0;
         //double   TipADC_V_R2 = ESP32_ADC2Vol(POWER_ADC);
         double   TipADC_V_R1 = (TipADC_V_R2 * POWER_ADC_VCC_R1) / POWER_ADC_R2_GND;
         SYS_Voltage = TipADC_V_R1 + TipADC_V_R2;
@@ -166,7 +170,8 @@ uint16_t GetADC0(void) {
     }
 
     //读取并平滑滤波经过运算放大器放大后的热电偶ADC数据
-    uint16_t ADC_RAW = analogRead(TIP_ADC_PIN);
+    // uint16_t ADC_RAW = analogRead(TIP_ADC_PIN);
+    uint16_t ADC_RAW = ADC0.readMiliVolts() * 3.9;
     uint16_t ADC;
     
     //卡尔曼滤波器
