@@ -8,6 +8,7 @@
 #include <Wire.h>
 #include <Ticker.h>
 #include <ESP32AnalogRead.h>
+#include <SparkFun_LIS2DH12.h>
 // #include <OneButton.h>
 #include <Button2.h>
 // #include "BluetoothSerial.h"
@@ -199,5 +200,7 @@ extern uint8_t TempCTRL_Status;
 extern char *TempCTRL_Status_Mes[];
 
 extern hw_timer_t *buttonTimer;
+
+extern SPARKFUN_LIS2DH12 accel;
 
 #endif

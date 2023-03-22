@@ -102,6 +102,9 @@ hw_timer_t* SoundTimer = NULL;
 
 // ADC
 ESP32AnalogRead powerADC;
+
+// Accelerometer
+SPARKFUN_LIS2DH12 accel;
 /////////////////////////////////////////////////////////////////
 
 //先初始化硬件->显示LOGO->初始化软件
@@ -146,6 +149,12 @@ void setup() {
     Disp.setFont(u8g2_font_wqy12_t_gb2312);
     Disp.setDrawColor(1);
     Disp.setFontMode(1);
+
+    if (accel.begin() == false) {
+        Serial.println("Accelerometer not detected");
+        // while (1);
+    }
+    
 
     // ////////////////////////////初始化软件/////////////////////////////
 
