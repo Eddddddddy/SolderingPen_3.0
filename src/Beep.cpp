@@ -1,6 +1,6 @@
 #include "OpenT12.h"
 //BEEP
-uint8_t BEEP_Channel = 2;    // 通道
+uint8_t BEEP_Channel = 4;    // 通道
 // uint8_t BEEP_Channel2 = 1;    // 通道
 
 void BeepInit(void) {

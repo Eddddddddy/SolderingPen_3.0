@@ -82,6 +82,9 @@
 // 到温提示声播放稳定期：防止温度没有稳定下来就播放到温音效
 #define TempToneStabilitytime 1000
 
+// 休眠阈值
+#define WAKEUP_THRESHOLD_DEFAULT 1.0
+
 enum SYSLANG
 {
     LANG_English = 0,
@@ -202,5 +205,7 @@ extern char *TempCTRL_Status_Mes[];
 extern hw_timer_t *buttonTimer;
 
 extern SPARKFUN_LIS2DH12 accel;
+extern float Wakeup_Threshold;
+extern float lastGx, lastGy, lastGz;
 
 #endif

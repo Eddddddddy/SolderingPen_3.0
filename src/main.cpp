@@ -105,6 +105,7 @@ ESP32AnalogRead powerADC;
 
 // Accelerometer
 SPARKFUN_LIS2DH12 accel;
+extern float Wakeup_Threshold;
 /////////////////////////////////////////////////////////////////
 
 //先初始化硬件->显示LOGO->初始化软件
@@ -150,6 +151,7 @@ void setup() {
     Disp.setDrawColor(1);
     Disp.setFontMode(1);
 
+    Wakeup_Threshold = WAKEUP_THRESHOLD_DEFAULT*30;
     if (accel.begin() == false) {
         Serial.println("Accelerometer not detected");
         // while (1);
@@ -171,10 +173,10 @@ void setup() {
     LoadTipConfig();
 
     //播放音效
-    SetSound(BootSound);
+    // SetSound(BootSound);
 
     //显示Logo
-    EnterLogo();
+    // EnterLogo();
     
     //开机密码
     while (!EnterPasswd()) {

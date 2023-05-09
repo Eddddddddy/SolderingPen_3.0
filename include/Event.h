@@ -5,6 +5,10 @@
 extern uint32_t BoostTimer;
 
 extern uint32_t EventTimerUpdate;
+
+extern float lastGx, lastGy, lastGz;
+extern float Wakeup_Threshold;
+
 void TimerUpdateEvent(void);
 
 void BoostButton_EventLoop(void);

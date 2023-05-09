@@ -453,7 +453,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60106",
+                "PLATFORMIO=60107",
                 "ARDUINO_ADAFRUIT_FEATHER_ESP32S2_NOPSRAM",
                 "ARDUINO_USB_CDC_ON_BOOT=1",
                 "HAVE_CONFIG_H",

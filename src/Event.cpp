@@ -4,6 +4,10 @@
 uint32_t EventTimerUpdate = 0;
 // 屏保事件计时器
 static uint32_t ScreenProtectorTimer = 0;
+
+float lastGx, lastGy, lastGz;
+float Wakeup_Threshold;
+
 /***
  * @description: 用户有动作时将会触发此函数
  * @param {*}
@@ -289,13 +293,15 @@ void SW_WakeLOOP(void) {
   //     else TipCallSleepEvent = false;
   // }else TipCallSleepEvent = false;
 
-  if (abs(accel.getX() - gx) > WAKEUP_THRESHOLD ||
-      abs(accel.getY() - gy) > WAKEUP_THRESHOLD ||
-      abs(accel.getZ() - gz) > WAKEUP_THRESHOLD) {
-    gx = accel.getX();
-    gy = accel.getY();
-    gz = accel.getZ();
-    handleMoved = true;
-    //    Serial.println("进入工作状态!");
+  // Serial.println("accel X Y Z: " + String(accel.getX()) + " " +
+  //                String(accel.getY()) + " " + String(accel.getZ()));
+
+  if (abs(accel.getX() - lastGx) > Wakeup_Threshold ||
+      abs(accel.getY() - lastGy) > Wakeup_Threshold ||
+      abs(accel.getZ() - lastGz) > Wakeup_Threshold) {
+    lastGx = accel.getX();
+    lastGy = accel.getY();
+    lastGz = accel.getZ();
+    TimerUpdateEvent();
   }
 }
