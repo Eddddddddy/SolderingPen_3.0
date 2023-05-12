@@ -4,7 +4,7 @@ uint8_t TipID = 0;
 uint8_t TipTotal = 1;
 
 TIPCONFIG MyTip[MaxTipConfig] = {
-    {{TempP1,TempP2,TempP3,TempP4},{{30.0,0,0.5},{20.0,0,0.5}},"深圳K-1"},
+    {{TempP1,TempP2,TempP3,TempP4},{{30.0,0,0.5},{20.0,0,0.5}},"PTS200"},
 };
 
 /*** 

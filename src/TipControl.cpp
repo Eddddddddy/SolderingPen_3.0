@@ -1,11 +1,11 @@
 #include "OpenT12.h"
 
 //[既然有了nmos
-//为啥还要pmos]科普:https://www.bilibili.com/video/BV1Mb4y1k7fd?from=search&seid=15411923932488650975
+// 为啥还要pmos]科普:https://www.bilibili.com/video/BV1Mb4y1k7fd?from=search&seid=15411923932488650975
 
 enum MOS_Type { PMOS = 0, NMOS };
 // PWM
-uint8_t PWM_Freq = 255;    // 频率
+uint8_t PWM_Freq = 200;    // 频率
 uint8_t PWM1_Channel = 1;  // 通道
 // uint8_t PWM2_Channel = 0;    // 通道
 uint8_t PWM_Resolution = 8;  // 分辨率
@@ -56,7 +56,7 @@ void TipControlInit(void) {
  */
 double Get_MainPowerVoltage(void) {
   static uint32_t CoolTimer = 0;
-  if (millis() - CoolTimer > 100) {
+  if (millis() - CoolTimer > 1000) {
     // uint16_t POWER_ADC = analogRead(POWER_ADC_PIN);
     //  double TipADC_V_R2 = analogReadMilliVolts(POWER_ADC_PIN) / 1000.0;
     double TipADC_V_R2 = powerADC.readMiliVolts() / 1000.0;
@@ -95,9 +95,10 @@ double GetCurrent(void) {
 double GetNTCTemp(void) {
   static uint32_t CoolTimer = 0;
   if (millis() - CoolTimer > 1000) {
-    double Ert = analogReadMilliVolts(NTC_ADC_PIN) / 1000.0;
-    double Rt = (Ert * NTC_Rs) / (SYS_Voltage - Ert);
-    NTC_Temp = 1 / ((log(Rt / NTC_Rs)) / (NTC_B) + 1 / (NTC_Tc + K2C)) - K2C;
+    // double Ert = analogReadMilliVolts(NTC_ADC_PIN) / 1000.0;
+    // double Rt = (Ert * NTC_Rs) / (SYS_Voltage - Ert);
+    // NTC_Temp = 1 / ((log(Rt / NTC_Rs)) / (NTC_B) + 1 / (NTC_Tc + K2C)) - K2C;
+    NTC_Temp = accel.getTemperature();
     // 重置冷却计时器
     CoolTimer = millis();
   }
@@ -157,13 +158,11 @@ uint32_t ADCReadCoolTimer = 0;
 
 // 获取ADC读数
 uint16_t GetADC0(void) {
-
-
   if (SYS_Ready) {
     ADCSamplingInterval = millis() - ADCSamplingTime;
-    if (ADCSamplingInterval < ADC_PID_Cycle * (9 / 10.0))
+    if (ADCSamplingInterval < ADC_PID_Cycle * (9 / 10.0)){
       return LastADC;  // 9/10周期ADC不应该工作，应该把时间留给加热
-
+    }
     // 若原输出非关闭，则在关闭输出后等待一段时间，因为热电偶和加热丝是串在一起的，只有不加热的时候才能安全访问热电偶温度
     if (PWMOutput_Lock == false) {
       ADCReadCoolTimer = millis();
@@ -171,7 +170,8 @@ uint16_t GetADC0(void) {
       PWMOutput_Lock = true;
     }
 
-    if (millis() - ADCReadCoolTimer <= ADC_PID_Cycle / 1) {
+    if (millis() - ADCReadCoolTimer <= ADC_PID_Cycle / 10) {
+    // if (millis() - ADCReadCoolTimer <= 5) {
       return -1;  // 数据未准备好
     }
   }

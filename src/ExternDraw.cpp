@@ -322,7 +322,9 @@ void DrawStatusBar(bool color) {
     //显示输出功率 百分比
     // Disp.printf("%d%%", map(POWER, 0, 255, 0, 100));
     //显示真实功率
-    Disp.printf("%.0fW", SYS_Voltage * SYS_Current);
+    // Disp.printf("%.0fW", SYS_Voltage * SYS_Current);
+    // 显示机身温度
+    Disp.printf("%.0fC", NTC_Temp);
 
     
 

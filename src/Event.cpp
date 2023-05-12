@@ -197,6 +197,8 @@ void SYS_StateCode_Update(void) {
   Get_MainPowerVoltage();
   // 读取输出电流
   GetCurrent();
+  // 读取温度
+  GetNTCTemp();
 
   // 欠压警告
   if (UndervoltageAlert != 0 && SYS_Voltage < UndervoltageAlert)

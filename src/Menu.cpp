@@ -500,19 +500,19 @@ void System_UI(void) {
                 Disp.drawUTF8(91, 40, TempCTRL_Status_Mes[TempCTRL_Status]);
 
                 //欠压警报
-                if (UnderVoltageEvent) {
-                    if ((millis() / 1000) % 2) {
-                        //欠压告警图标
-                        Draw_Slow_Bitmap(74, 21, Battery_NoPower, 14, 14);
-                    }else{
+                // if (UnderVoltageEvent) {
+                //     if ((millis() / 1000) % 2) {
+                //         //欠压告警图标
+                //         Draw_Slow_Bitmap(74, 21, Battery_NoPower, 14, 14);
+                //     }else{
                         //主电源电压
                         Disp.setCursor(74, 24);
                         Disp.printf("%.1fV", SYS_Voltage);
-                    }
-                }else{
-                    //显示蓝牙图标
-                    if (BLE_State) Draw_Slow_Bitmap(92, 25, IMG_BLE_S, 9, 11);
-                }
+                //     }
+                // }else{
+                //     //显示蓝牙图标
+                //     if (BLE_State) Draw_Slow_Bitmap(92, 25, IMG_BLE_S, 9, 11);
+                // }
 
                 ///////////////////////////////////////////////////////////////////////////////////
                 //显示当前温度
@@ -531,7 +531,7 @@ void System_UI(void) {
                 ///////////////////////////////////////////////////////////////////////////////////
 
                 //右上角运行指示角标
-                if (POWER > 0 && PWM_WORKY) {
+                if (POWER > 0) {
                     uint8_t TriangleSize = map(POWER,0,255,16,0);
                     //Disp.drawTriangle(100 + TriangleSize, 0, 127, 0, 127, 27 - TriangleSize);
                     Disp.drawTriangle((119 - 12) + TriangleSize, 12, 125, 12, 125, (18 +12) - TriangleSize);
