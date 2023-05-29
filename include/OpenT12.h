@@ -1,5 +1,8 @@
 #ifndef OPENT12_H
 #define OPENT12_H
+
+#define VERSION "v0.1.0"  // 20230529
+
 #include <math.h>
 #include <Arduino.h>
 #include <Shell.h>
@@ -12,6 +15,8 @@
 // #include <OneButton.h>
 #include <Button2.h>
 // #include "BluetoothSerial.h"
+
+//
 #include "Type.h"
 #include "serial_putc.h"
 #include "MyShell.h"
@@ -29,6 +34,9 @@
 #include "qrcode.h"
 #include "BLE.h"
 #include "Bitmap.h"
+
+//
+#include "MSC.h"
 
 #define setbit(x, y) x |= (1 << y)
 #define clrbit(x, y) x &= ~(1 << y)
@@ -207,5 +215,7 @@ extern hw_timer_t *buttonTimer;
 extern SPARKFUN_LIS2DH12 accel;
 extern float Wakeup_Threshold;
 extern float lastGx, lastGy, lastGz;
+
+extern FirmwareMSC MSC_Update;
 
 #endif

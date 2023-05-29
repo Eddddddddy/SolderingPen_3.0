@@ -61,13 +61,13 @@ bool PWM_WORKY         = false;
 uint8_t PIDMode                     = true;
 uint8_t Use_KFP                     = true;
 uint8_t PanelSettings               = PANELSET_Simple;
-uint8_t ScreenFlip                  = false;
+uint8_t ScreenFlip                  = true;
 uint8_t SmoothAnimation_Flag        = true;
 float   ScreenBrightness            = 128;
 uint8_t OptionStripFixedLength_Flag = false;
 
 uint8_t Volume = 100;
-uint8_t RotaryDirection = false;
+uint8_t RotaryDirection = true;
 uint8_t HandleTrigger = HANDLETRIGGER_VibrationSwitch;
 
 double  SYS_Voltage = 3.3;
@@ -221,7 +221,7 @@ void SYS_Reboot(void) {
 
 void About(void) {
     //播放Logo动画
-    EnterLogo();
+    // EnterLogo();
     //生成项目QRCode
     QRCode qrcode;
     uint8_t qrcodeData[qrcode_getBufferSize(3)];
@@ -229,11 +229,11 @@ void About(void) {
     switch (Language) {
         case LANG_Chinese:
             // qrcode_initText(&qrcode, qrcodeData, 3, 0, "https://gitee.com/createskyblue/OpenT12");   //禁用Gitee源:注册不方便
-            qrcode_initText(&qrcode, qrcodeData, 3, 0, "https://github.com/createskyblue/OpenT12");
+            qrcode_initText(&qrcode, qrcodeData, 3, 0, "https://github.com/Eddddddddy/SolderingPen_3.0");
         break;
 
         default:
-            qrcode_initText(&qrcode, qrcodeData, 3, 0, "https://github.com/createskyblue/OpenT12");
+            qrcode_initText(&qrcode, qrcodeData, 3, 0, "https://github.com/Eddddddddy/SolderingPen_3.0");
         break;
     }
 
@@ -263,7 +263,7 @@ void About(void) {
             case 0: sprintf(buffer, "%s Ver-%d",ESP.getChipModel(),(int)ESP.getChipRevision()); break;
             case 1: sprintf(buffer, "%d@%uMHz %uMb U%.1f%%", (int)ESP.getChipCores(),ESP.getCpuFreqMHz(),ESP.getFlashChipSize()/1024/1024,(float)ESP.getSketchSize()/ESP.getFlashChipSize() * 100.0); break;
             case 2: sprintf(buffer, "%s %s", __DATE__,__TIME__); break;
-            case 3: sprintf(buffer, "%s", ESP.getSdkVersion()); break;
+            case 3: sprintf(buffer, "SDK: %s Ver: %s", ESP.getSdkVersion(), VERSION); break;
             case 4: sprintf(buffer, "MAC %s", ChipMAC_S); break;
         }
         Disp.print(buffer);

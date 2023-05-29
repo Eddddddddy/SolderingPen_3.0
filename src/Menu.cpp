@@ -209,7 +209,7 @@ struct Menu_Level_System MenuLevel[] = {
     {19,0,0, 5 ,Menu_NULL_IMG},
     {20,0,0, 4 ,Menu_NULL_IMG},
     {21,0,0, 4 ,Menu_NULL_IMG},
-    {22,0,0, 3 ,Menu_NULL_IMG},
+    {22,0,0, 2 ,Menu_NULL_IMG},
 };
 
 /*
@@ -238,14 +238,14 @@ struct Menu_Level_System MenuLevel[] = {
 #define Menu_NULL_OP                6
 
 struct Menu_System Menu[] = {
-    { 0,0,       Title_Menu_Op,         "欢迎使用[朱雀]控制器",  Menu_NULL_IMG,              0,                                  0,       *Save_Exit_Menu_System},
-    { 0,1,       Jump_Menu_Op,          "此焊台",               Menu_NULL_IMG,              1,                                  0,          Menu_NULL_F},
-    { 0,2,       Jump_Menu_Op,          "此系统",               Menu_NULL_IMG,              5,                                  0,          Menu_NULL_F},
+    { 0,0,       Title_Menu_Op,         "菜单",  Menu_NULL_IMG,              0,                                  0,       *Save_Exit_Menu_System},
+    { 0,1,       Jump_Menu_Op,          "烙铁设置",               Menu_NULL_IMG,              1,                                  0,          Menu_NULL_F},
+    { 0,2,       Jump_Menu_Op,          "系统设置",               Menu_NULL_IMG,              5,                                  0,          Menu_NULL_F},
     { 0,3,       F_Menu_Op,          "返回",               Menu_NULL_IMG,                0,                                  0,          *Save_Exit_Menu_System},
     // { 0,4,       F_Menu_Op,          "测试",               Menu_NULL_IMG,                0,                                  0,          *(EnterLogo)},
    // { 0,4,       F_Menu_Op,          "重启",               Menu_NULL_IMG,                0,                                  0,          *(SYS_Reboot)},
  
-    { 1,0,       Title_Menu_Op,         "此焊台",               Menu_NULL_IMG,              0,                                  1,          Menu_NULL_F},
+    { 1,0,       Title_Menu_Op,         "烙铁设置",               Menu_NULL_IMG,              0,                                  1,          Menu_NULL_F},
     { 1,1,       Jump_Menu_Op,          "烙铁头",               IMG_Tip,              2,                                  0,          Menu_NULL_F},
     { 1,2,       Jump_Menu_Op,          "温度场景",             Set1,              3,                                  0,          Menu_NULL_F},
     { 1,3,       Jump_Menu_Op,          "定时场景",             Set2,              4,                                  0,          Menu_NULL_F},
@@ -275,13 +275,13 @@ struct Menu_System Menu[] = {
     { 4,4,       Progress_Bar_Menu_Op,  "屏保触发(秒)",         Set4,              Slide_space_ScreenProtectorTime,                0,          Menu_NULL_F},
     { 4,5,       Jump_Menu_Op,          "返回",                  Save,              1,                                  3,          Menu_NULL_F},
  
-    { 5,0,       Title_Menu_Op,         "此系统",               Menu_NULL_IMG,              0,                                  2,          Menu_NULL_F},
+    { 5,0,       Title_Menu_Op,         "系统设置",               Menu_NULL_IMG,              0,                                  2,          Menu_NULL_F},
     { 5,1,       Jump_Menu_Op,          "个性化",               IMG_Pen,              6,                                  0,          Menu_NULL_F},
-    { 5,2,       Jump_Menu_Op,          "蓝牙",                 IMG_BLE,              22,                                  0,          Menu_NULL_F},
+    { 5,2,       Jump_Menu_Op,          "升级固件",                 IMG_BLE,              22,                                  0,          Menu_NULL_F},
     { 5,3,       Progress_Bar_Menu_Op,  "欠压提醒",             Set6,              Slide_space_UndervoltageAlert,                    0,          Menu_NULL_F},
     { 5,4,       F_Menu_Op,             "开机密码",             Lock,              0,              0,                   *SetPasswd},
     { 5,5,       Jump_Menu_Op,          "语言设置",             Set_LANG,              13,                                  0,          Menu_NULL_F},
-    { 5,6,       F_Menu_Op,             "关于朱雀",             QRC,              5,                                  5,          *About},
+    { 5,6,       F_Menu_Op,             "关于固件",             QRC,              5,                                  5,          *About},
     { 5,7,       Jump_Menu_Op,          "返回",                 Set7,              0,                                  2,          Menu_NULL_F},
  
     { 6,0,       Title_Menu_Op,         "个性化",               Menu_NULL_IMG,              5,                                  1,          Menu_NULL_F},
@@ -308,10 +308,10 @@ struct Menu_System Menu[] = {
     { 9,1,       SingleBox_Menu_Op,     "固定",                   Menu_NULL_IMG,              SwitchSpace_OptionStripFixedLength, true,          Menu_NULL_F},
     { 9,2,       SingleBox_Menu_Op,     "自适应",                 Menu_NULL_IMG,              SwitchSpace_OptionStripFixedLength, false,          Menu_NULL_F},
     { 9,3,       Jump_Menu_Op,          "--- 往下翻 ---",         Menu_NULL_IMG,              9,                                  4,          Menu_NULL_F},
-    { 9,4,       Menu_NULL_OP,          "人民!",                   Menu_NULL_IMG,              0,                                  0,          Menu_NULL_F},
-    { 9,5,       Menu_NULL_OP,          "只有人民~",               Menu_NULL_IMG,              0,                                  0,          Menu_NULL_F},
-    { 9,6,       Menu_NULL_OP,          "才是创造世界历史的",      Menu_NULL_IMG,              0,                                  1,          Menu_NULL_F},
-    { 9,7,       Menu_NULL_OP,          "动 力！",                   Menu_NULL_IMG,              0,                                  0,          Menu_NULL_F},
+    { 9,4,       Menu_NULL_OP,          "项目1",                   Menu_NULL_IMG,              0,                                  0,          Menu_NULL_F},
+    { 9,5,       Menu_NULL_OP,          "项目2",               Menu_NULL_IMG,              0,                                  0,          Menu_NULL_F},
+    { 9,6,       Menu_NULL_OP,          "项目3",      Menu_NULL_IMG,              0,                                  1,          Menu_NULL_F},
+    { 9,7,       Menu_NULL_OP,          "项目4",                   Menu_NULL_IMG,              0,                                  0,          Menu_NULL_F},
     { 9,8,       Jump_Menu_Op,          "--- 往上翻 ---",         Menu_NULL_IMG,              9,                                  0,          Menu_NULL_F},
     { 9,9,       Jump_Menu_Op,          "返回",                   Menu_NULL_IMG,              7,                                  5,          Menu_NULL_F},
  
@@ -331,7 +331,7 @@ struct Menu_System Menu[] = {
     { 13,1,       SingleBox_Menu_Op,     "简体中文",               Lang_CN,               SwitchSpace_Language,                    LANG_Chinese,          *JumpWithTitle},
 
     { 14,0,       Title_Menu_Op,         "手柄触发",               Menu_NULL_IMG,              6,                                  4,          Menu_NULL_F},
-    { 14,1,       SingleBox_Menu_Op,     "震动开关",               IMG_VibrationSwitch,        SwitchSpace_HandleTrigger,          0,          *JumpWithTitle},
+    { 14,1,       SingleBox_Menu_Op,     "震动检测",               IMG_VibrationSwitch,        SwitchSpace_HandleTrigger,          0,          *JumpWithTitle},
     { 14,2,       SingleBox_Menu_Op,     "干簧管",                 IMG_ReedSwitch,             SwitchSpace_HandleTrigger,          1,          *JumpWithTitle},
  
     { 15,0,       Title_Menu_Op,         "烙铁头列表",             Menu_NULL_IMG,              2,                                  1,          *LoadTipConfig},
@@ -382,10 +382,10 @@ struct Menu_System Menu[] = {
     { 21,3,       Progress_Bar_Menu_Op,  "温差≤50",               Menu_NULL_IMG,           Slide_space_ADC_PID_Cycle_List_2,   0,          Menu_NULL_F },
     { 21,4,       Jump_Menu_Op,          "返回",                   Menu_NULL_IMG,          19,                                 3,          Menu_NULL_F },
 
-    { 22,0,       Title_Menu_Op,         "蓝牙",             Menu_NULL_IMG,            5,                                 2,          Menu_NULL_F },
+    { 22,0,       Title_Menu_Op,         "升级固件",             Menu_NULL_IMG,            5,                                 2,          Menu_NULL_F },
     { 22,1,       Switch_Menu_Op,        "状态",               Menu_NULL_IMG,         SwitchSpace_BLE_State,   0,          *BLE_Restart },
-    { 22,2,       F_Menu_Op,             "设备名称",          Menu_NULL_IMG,          22,   2,          *BLE_Rename },
-    { 22,3,       Jump_Menu_Op,          "返回",               Menu_NULL_IMG,          5,                                 2,          Menu_NULL_F },
+    // { 22,2,       F_Menu_Op,             "设备名称",          Menu_NULL_IMG,          22,   2,          *BLE_Rename },
+    { 22,2,       Jump_Menu_Op,          "返回",               Menu_NULL_IMG,          5,                                 2,          Menu_NULL_F },
 };
 /***
  * @description: 快速打开烙铁列表
