@@ -117,11 +117,12 @@ double CalculateTemp(double ADC, double P[]) {
 
 // PWM输出模块
 uint8_t PWMOutput_Lock = true;
+uint8_t User_Lock = true;
 void PWMOutput(uint8_t pwm) {
   // printf("1 PWMOutput设置输出功率 %d\n", pwm);
   PWM_WORKY = true;
   // PWM锁
-  if (PWMOutput_Lock || ShutdownEvent || Menu_System_State || ERROREvent) {
+  if (User_Lock || PWMOutput_Lock || ShutdownEvent || Menu_System_State || ERROREvent) {
     PWM_WORKY = false;
     // Log(LOG_INFO,"输出被限制");
     // printf("输出被限制 PWMOutput_Lock=%d ShutdownEvent=%d

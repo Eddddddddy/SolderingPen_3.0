@@ -173,6 +173,10 @@ void SYS_StateCode_Update(void) {
     TempCTRL_Status = TEMP_STATUS_SLEEP;
   }
 
+  if(User_Lock){
+    TempCTRL_Status = TEMP_STATUS_LOCK;
+  }
+
   // 到温声效播放事件
   static uint32_t TempToneStabilitytimer =
       0;  // 到温稳定状态计时器，确保真正播放到温音效

@@ -206,6 +206,7 @@ enum TEMP_CTRL_STATUS_CODE
     TEMP_STATUS_WORKY,
     TEMP_STATUS_HEAT,
     TEMP_STATUS_HOLD,
+    TEMP_STATUS_LOCK
 };
 extern uint8_t TempCTRL_Status;
 extern char *TempCTRL_Status_Mes[];
