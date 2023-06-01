@@ -84,14 +84,14 @@ float ADC_PID_Cycle = 100;
 uint8_t TempCTRL_Status = TEMP_STATUS_OFF;
 uint8_t* C_table[] = { c1, c2, c3, Lightning, c5, c6, c7, c2};
 char* TempCTRL_Status_Mes[]={
-    "错误",
-    "停机",
-    "休眠",
-    "提温",
-    "正常",
-    "加热",
-    "维持",
-    "锁定"
+    "ERR",
+    "STOP",
+    "SLP",
+    "UP",
+    "WORK",
+    "HEAT",
+    "STAY",
+    "LOCK"
 };
 
 //系统信息
@@ -117,7 +117,7 @@ void setup() {
     ////////////////////////////初始化硬件/////////////////////////////
     //初始化串口
     Serial.begin(115200);
-    delay(2000);
+    // delay(2000);
     Serial.println("Soldering Pen V3.0");
 
     //获取系统信息
