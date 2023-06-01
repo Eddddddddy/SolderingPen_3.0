@@ -27,28 +27,48 @@ void TimerUpdateEvent(void) {
 uint32_t BoostTimer = 0;
 void BoostButton_EventLoop(void) {
   // 单击 进行短时功率爆发
-  if (SYSKey == 1) {
-    if (!BoostEvent) {
-      BoostEvent = true;
-      BoostTimer = millis();
-    } else
+  if (User_Lock) {
+    if (SYSKey == 1) {
+      User_Lock = false;
+    }
+  } else {
+    if (SYSKey == 1) {
+      if (!BoostEvent) {
+        BoostEvent = true;
+        BoostTimer = millis();
+      } else
+        BoostEvent = false;
+    }
+    // 功率爆发技能计时器
+    if (millis() - BoostTimer > BoostTime * 1000) {
+      // 技能时间到
       BoostEvent = false;
-  }
-  // 功率爆发技能计时器
-  if (millis() - BoostTimer > BoostTime * 1000) {
-    // 技能时间到
-    BoostEvent = false;
+    }
   }
 }
 /***
- * @description: 双击快速召唤PID设置
+ * @description: 三击快速召唤PID设置
  * @param {*}
  * @return {*}
  */
 void FastPID_MenuSummon_EventLoop(void) {
   // 若发现双击，则快速打开PID菜单
-  if (SYSKey == 3) System_PIDMenu_Init();
+  if (SYSKey == 4) System_PIDMenu_Init();
 }
+
+/***
+ * @description: 双击锁定
+ * @param {*}
+ * @return {*}
+ */
+void User_Lock_EventLoop(void) {
+  if (SYSKey == 3) {
+    if (!User_Lock) {
+      User_Lock = true;
+    }
+  }
+}
+
 /***
  * @description: 计时器事件Loop
  * @param {*}
@@ -62,6 +82,8 @@ void TimerEventLoop(void) {
   BoostButton_EventLoop();
   // 更新PID菜单快速召唤事件
   FastPID_MenuSummon_EventLoop();
+  // 更新锁定事件
+  User_Lock_EventLoop();
 
   // 刷新手柄触发开关事件：可引发手柄休眠事件
   SW_WakeLOOP();
@@ -104,7 +126,8 @@ void TimerEventLoop(void) {
  * @return {*}
  */
 void SYS_StateCode_Update(void) {
-  static uint32_t TipEventTimer = 0;  // 烙铁安装移除事件计时器：防止事件临界抖动
+  static uint32_t TipEventTimer =
+      0;  // 烙铁安装移除事件计时器：防止事件临界抖动
   if (CalculateTemp((double)LastADC, PTemp) > 500) {
     if (millis() - TipEventTimer > TipEvent_CoolTime) {
       if (TipInstallEvent) {
@@ -173,7 +196,7 @@ void SYS_StateCode_Update(void) {
     TempCTRL_Status = TEMP_STATUS_SLEEP;
   }
 
-  if(User_Lock){
+  if (User_Lock) {
     TempCTRL_Status = TEMP_STATUS_LOCK;
   }
 

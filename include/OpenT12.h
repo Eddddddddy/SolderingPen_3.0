@@ -1,7 +1,7 @@
 #ifndef OPENT12_H
 #define OPENT12_H
 
-#define VERSION "v0.1.0"  // 20230529
+#define VERSION "v0.2.0"  // 20230601
 
 #include <math.h>
 #include <Arduino.h>

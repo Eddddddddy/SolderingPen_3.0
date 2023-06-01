@@ -24,6 +24,7 @@ void sys_RotaryInit(void)
     RButton.begin(BUTTON_PIN);
     RButton.setClickHandler(sys_Counter_click);
     RButton.setDoubleClickHandler(sys_Counter_doubleclick);
+    RButton.setTripleClickHandler(sys_Counter_tripleclick);
     RButton.setLongClickDetectedHandler(sys_Counter_longclick);
     RButton.setDebounceTime(25);
     RButton.setLongClickTime(300);
@@ -32,7 +33,7 @@ void sys_RotaryInit(void)
     PButton.setDebounceTime(0);
     PButton.setLongClickTime(200);
     PButton.setID(1);
-    PButton.setClickHandler(sys_PN_click);
+    PButton.setPressedHandler(sys_PN_click);
     PButton.setLongClickDetectedHandler(sys_PN_click);
     PButton.setLongClickDetectedRetriggerable(true);
 
@@ -40,7 +41,7 @@ void sys_RotaryInit(void)
     NButton.setDebounceTime(0);
     NButton.setLongClickTime(200);
     NButton.setID(2);
-    NButton.setClickHandler(sys_PN_click);
+    NButton.setPressedHandler(sys_PN_click);
     NButton.setLongClickDetectedHandler(sys_PN_click);
     NButton.setLongClickDetectedRetriggerable(true);
 
@@ -288,6 +289,17 @@ void sys_Counter_doubleclick(Button2 &b)
     Serial.printf("触发双击事件\n");
     SetSound(Beep2);
     Write_RButton_FIFO(3);
+}
+
+/***
+ * @description: 按键三击回调函数
+ * @param {*}
+ * @return {*}
+ */
+void sys_Counter_tripleclick(Button2 &b){
+    Serial.printf("触发三击事件\n");
+    SetSound(Beep2);
+    Write_RButton_FIFO(4);
 }
 
 // 编码器按键按下 + 软件滤波

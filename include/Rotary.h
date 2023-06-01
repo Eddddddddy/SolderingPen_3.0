@@ -16,6 +16,7 @@ void RotaryDown(void);
 
 void sys_Counter_click(Button2 &b);
 void sys_Counter_doubleclick(Button2 &b);
+void sys_Counter_tripleclick(Button2 &b);
 void sys_Counter_longclick(Button2 &b);
 void sys_Counter_IRQHandler(void);
 double sys_Counter_Get(void);
