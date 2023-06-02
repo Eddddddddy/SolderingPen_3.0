@@ -19,6 +19,7 @@ void SYS_Save(void)
     {
         Log(LOG_ERROR, "存档写入失败!");
         Pop_Windows("写入失败");
+        timerAlarmEnable(buttonTimer);
         return;
     }
 
@@ -90,6 +91,7 @@ void SYS_Load(void)
         Log(LOG_ERROR, "存档不存在！");
         Pop_Windows("存档不存在！");
         file.close();
+        timerAlarmEnable(buttonTimer);
         return;
     }
 
@@ -108,7 +110,7 @@ void SYS_Load(void)
         timerAlarmEnable(buttonTimer);
         return;
     }
-
+ 
     file.read((uint8_t *)&BootTemp, sizeof(BootTemp));
     file.read((uint8_t *)&SleepTemp, sizeof(SleepTemp));
     file.read((uint8_t *)&BoostTemp, sizeof(BoostTemp));
