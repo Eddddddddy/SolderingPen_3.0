@@ -594,21 +594,21 @@ void Update_OLED_Flip(void) {
 
 void PopMsg_RotaryDirection(void) {
     char buffer[20];
-    sprintf(buffer, "编码器:%s", (RotaryDirection == true) ? "顺时针" : "逆时针");
+    sprintf(buffer, "Button :%s", (RotaryDirection == true) ? "Right" : "Left");
     Pop_Windows(buffer);
     delay(500);
 }
 
 void PopMsg_ScreenFlip(void) {
     char buffer[20];
-    sprintf(buffer, "%s", (ScreenFlip == true) ? "翻转显示" : "正常显示");
+    sprintf(buffer, "%s", (ScreenFlip == true) ? "Flip" : "Normal");
     Pop_Windows(buffer);
     delay(500);
 }
 
 void PopMsg_ListMode(void) {
     char buffer[20];
-    sprintf(buffer, "%s", (MenuListMode == true) ? "列表模式" : "图标模式");
+    sprintf(buffer, "%s", (MenuListMode == true) ? "List" : "Icon");
     Pop_Windows(buffer);
     delay(500);
     Next_Menu();
@@ -1041,7 +1041,7 @@ void Menu_Control() {
 
                     //开关控件
                 case 3:
-                    Draw_Utf(SCREEN_COLUMN - 32 - 1, (i + Menu_Smooth_Animation[0].x) * 16 + 1, *Switch_space[Menu[Get_Menu_Id(real_Level_Id, MenuLevel[real_Level_Id].x + i)].a] ? (char*)"开启" : (char*)"关闭");
+                    Draw_Utf(SCREEN_COLUMN - 32 - 1, (i + Menu_Smooth_Animation[0].x) * 16 + 1, *Switch_space[Menu[Get_Menu_Id(real_Level_Id, MenuLevel[real_Level_Id].x + i)].a] ? (char*)"ON" : (char*)"OFF");
                     break;
 
                     //滑动条
