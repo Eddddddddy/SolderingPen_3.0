@@ -19,7 +19,7 @@ extern float aggKp, aggKi, aggKd;
 extern float consKp, consKi, consKd;
 
 extern uint8_t PWMOutput_Lock;
-extern uint8_t User_Lock;
+extern uint8_t User_Lock;    
 
 extern double Get_MainPowerVoltage(void);
 extern double GetCurrent(void);

@@ -125,6 +125,8 @@ void setup() {
     Serial.printf(CompileTime, "%s %s", __DATE__, __TIME__);
     for (uint8_t i = 0;i < 6;i++)  Serial.printf(ChipMAC_S + i * 3, "%02X%s", ((uint8_t*)&ChipMAC)[i], (i != 5) ? ":" : "");
 
+    initPD();                       // init PD3.0 (9V/12V/15V/20V)
+    setPDVoltage(3);                // set PD3.0 voltage to 20V without test
 
     //初始化GPIO
     BeepInit();                     //蜂鸣器

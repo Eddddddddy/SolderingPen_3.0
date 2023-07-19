@@ -34,6 +34,7 @@
 #include "qrcode.h"
 #include "BLE.h"
 #include "Bitmap.h"
+#include "Power.h"
 
 //
 #include "MSC.h"
@@ -56,6 +57,10 @@
 #define NTC_ADC_PIN 34
 #define POWER_ADC_PIN 6
 #define CUR_ADC_PIN 32
+
+#define PD_CFG_0          16
+#define PD_CFG_1          17
+#define PD_CFG_2          18
 
 #define PWM1_PIN 5
 // #define PWM2_PIN      27
